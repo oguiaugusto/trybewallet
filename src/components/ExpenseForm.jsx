@@ -10,7 +10,7 @@ class ExpenseForm extends Component {
     this.state = {
       value: 0,
       description: '',
-      currency: 'defaultSelect',
+      currency: 'USD',
       method: 'defaultSelect',
       tag: 'defaultSelect',
     };
@@ -71,24 +71,10 @@ class ExpenseForm extends Component {
         method,
         tag,
       },
+      props: { currencies },
     } = this;
 
-    const supportedCurrencies = [
-      'USD',
-      'CAD',
-      'EUR',
-      'GBP',
-      'ARS',
-      'BTC',
-      'LTC',
-      'JPY',
-      'CHF',
-      'AUD',
-      'CNY',
-      'ILS',
-      'ETH',
-      'XRP',
-    ];
+    const supportedCurrencies = Object.keys(currencies);
 
     return (
       <div className="form-expense">
@@ -115,18 +101,20 @@ class ExpenseForm extends Component {
               onChange={ this.handleChange }
             />
           </label>
-          <select
-            data-testid="currency-input"
-            name="currency"
-            onChange={ this.handleChange }
-            value={ currency }
-          >
-            <option value="defaultSelect" disabled hidden>Selecione uma moeda</option>
-            <option value="BRL">BRL</option>
-            {supportedCurrencies.map((c) => (
-              <option data-testid={ c } key={ `currency-${c}` } value={ c }>{c}</option>
-            ))}
-          </select>
+          <label htmlFor="currency">
+            Moeda
+            <select
+              data-testid="currency-input"
+              name="currency"
+              id="currency"
+              onChange={ this.handleChange }
+              value={ currency }
+            >
+              {supportedCurrencies.map((c) => (
+                <option data-testid={ c } key={ `currency-${c}` } value={ c }>{c}</option>
+              ))}
+            </select>
+          </label>
           <select
             data-testid="method-input"
             name="method"
