@@ -1,12 +1,35 @@
 import React from 'react';
-import { Header } from '../components';
+import PropTypes from 'prop-types';
+import { TailSpin } from 'react-loader-spinner';
+import { connect } from 'react-redux';
+import { Header, ExpenseForm } from '../components';
 
 class Wallet extends React.Component {
   render() {
+    const { props: { isFetching } } = this;
+
     return (
-      <Header />
+      <>
+        <Header />
+        {isFetching ? (
+          <TailSpin type="TailSpin" color="#252525" height={ 30 } width={ 30 } />
+        ) : null}
+        <ExpenseForm />
+      </>
     );
   }
 }
 
-export default Wallet;
+const mapStateToProps = (state) => ({
+  isFetching: state.wallet.isFetching,
+});
+
+export default connect(mapStateToProps)(Wallet);
+
+Wallet.propTypes = {
+  isFetching: PropTypes.bool,
+};
+
+Wallet.defaultProps = {
+  isFetching: false,
+};
