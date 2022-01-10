@@ -1,8 +1,6 @@
 const INITIAL_STATE = {
-  wallet: {
-    currencies: [],
-    expenses: [],
-  },
+  currencies: [],
+  expenses: [],
 };
 
 export default function user(state = INITIAL_STATE, action) {
