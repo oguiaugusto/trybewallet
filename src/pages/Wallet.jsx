@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TailSpin } from 'react-loader-spinner';
 import { connect } from 'react-redux';
-import { Header, ExpenseForm } from '../components';
+import { Header, ExpenseForm, ExpensesTable } from '../components';
 
 class Wallet extends React.Component {
   render() {
@@ -15,6 +15,7 @@ class Wallet extends React.Component {
           <TailSpin type="TailSpin" color="#252525" height={ 30 } width={ 30 } />
         ) : null}
         <ExpenseForm />
+        <ExpensesTable />
       </>
     );
   }
