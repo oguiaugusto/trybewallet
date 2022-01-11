@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { saveEmailAct } from '../actions';
+import logoTrybeWallet from '../images/logo-trybewallet.svg';
+import coin from '../images/coin.svg';
+import '../style/login-page.css';
+
+const emailRegex = (
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/igm
+);
 
 class Login extends React.Component {
   constructor(props) {
@@ -31,13 +38,11 @@ class Login extends React.Component {
 
   enableBtn() {
     const { state: { email, password } } = this;
-    const emailMatch = email.match(
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/igm,
-    );
+    const emailMatch = email.match(emailRegex);
 
     const MIN_PASSWORD_LENGTH = 6;
 
-    return (
+    return !(
       !emailMatch || password.length < MIN_PASSWORD_LENGTH
     );
   }
@@ -48,38 +53,68 @@ class Login extends React.Component {
 
     if (loggedIn) return <Redirect to="/carteira" />;
 
+    const inputClassEmail = email.match(emailRegex)
+      ? 'validated-input' : 'unvalidated-input';
+
+    const MIN_PASSWORD_LENGTH = 6;
+
+    const inputClassPassword = password.length >= MIN_PASSWORD_LENGTH
+      ? 'validated-input' : 'unvalidated-input';
+
     return (
-      <div className="login-page">
-        <div className="login-form">
-          <label htmlFor="email">
-            Email
-            <input
-              data-testid="email-input"
-              type="text"
-              name="email"
-              id="email"
-              value={ email }
-              onChange={ this.handleChange }
-            />
-          </label>
-          <label htmlFor="password">
-            Senha
-            <input
-              data-testid="password-input"
-              type="password"
-              name="password"
-              id="password"
-              value={ password }
-              onChange={ this.handleChange }
-            />
-          </label>
-          <button
-            type="button"
-            onClick={ this.logIn }
-            disabled={ enableBtn }
-          >
-            Entrar
-          </button>
+      <div className="page-container d-flex">
+        <div
+          className="
+            login-container d-flex flex-column align-items-center justify-content-center
+          "
+        >
+          <img src={ logoTrybeWallet } alt="trybewallet logo" className="logo" />
+          <div className="login-form d-flex flex-column">
+            <p className="display-6 text-center mb-4">Entre para continuar</p>
+            <label htmlFor="email" className="form-label">
+              Digite seu email:
+              <input
+                data-testid="email-input"
+                type="text"
+                name="email"
+                id="email"
+                placeholder="email@email.com"
+                className={ `form-control mt-1 ${inputClassEmail}` }
+                value={ email }
+                onChange={ this.handleChange }
+                onKeyDown={ ({ key }) => (
+                  key === 'Enter' && enableBtn ? this.logIn() : null
+                ) }
+              />
+            </label>
+            <label htmlFor="password" className="form-label mt-1 mb-4">
+              Digite sua senha:
+              <input
+                data-testid="password-input"
+                type="password"
+                name="password"
+                id="password"
+                placeholder="****************"
+                className={ `form-control mt-1 ${inputClassPassword}` }
+                value={ password }
+                onChange={ this.handleChange }
+                onKeyDown={ ({ key }) => (
+                  key === 'Enter' && enableBtn ? this.logIn() : null
+                ) }
+              />
+            </label>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={ this.logIn }
+              disabled={ !enableBtn }
+            >
+              Entrar
+            </button>
+          </div>
+        </div>
+        <div className="coin-image d-flex align-items-center justify-content-center">
+          <img src={ coin } alt="coin" />
         </div>
       </div>
     );

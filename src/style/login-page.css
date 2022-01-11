@@ -1,0 +1,47 @@
+.login-container {
+  position: relative;
+  width: 50%;
+}
+
+.login-container .logo {
+  position: absolute;
+  top: 30px;
+}
+
+.login-form {
+  width: 70%;
+}
+
+.unvalidated-input:focus {
+  border-color: #fe8686;
+  box-shadow: 0 0 0 0.25rem rgb(253 13 13 / 25%);
+}
+
+.validated-input:focus {
+  border-color: #349f35;
+  box-shadow: 0 0 0 0.25rem rgb(32 145 11 / 25%);
+}
+
+.coin-image {
+  background-color: gainsboro;
+  border-bottom-right-radius: 25px;
+  border-top-right-radius: 25px;
+  width: 50%;
+}
+
+.coin-image img {
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.1));
+  width: 400px;
+}
+
+@media screen and ( min-width : 1440px ) {
+
+  .login-container .logo {
+    position: absolute;
+    top: 40px;
+  }
+
+  .coin-image img {
+    width: 500px;
+  }
+}
