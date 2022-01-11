@@ -5,7 +5,7 @@ import { editExpenseAct, removeExpenseAct } from '../actions';
 
 class ExpensesTable extends Component {
   render() {
-    const { props: { expenses, removeExpense, editExpense } } = this;
+    const { props: { expenses, removeExpense, editExpense, editing } } = this;
     return (
       <div className="expenses-table">
         <table>
@@ -46,6 +46,7 @@ class ExpensesTable extends Component {
                     type="button"
                     data-testid="edit-btn"
                     onClick={ () => editExpense(ex.id) }
+                    disabled={ editing }
                   >
                     E
                   </button>
@@ -53,6 +54,7 @@ class ExpensesTable extends Component {
                     type="button"
                     data-testid="delete-btn"
                     onClick={ () => removeExpense(ex.id) }
+                    disabled={ editing }
                   >
                     X
                   </button>
@@ -68,6 +70,7 @@ class ExpensesTable extends Component {
 
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
+  editing: state.wallet.editing,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -81,4 +84,9 @@ ExpensesTable.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.any).isRequired,
   removeExpense: PropTypes.func.isRequired,
   editExpense: PropTypes.func.isRequired,
+  editing: PropTypes.bool,
+};
+
+ExpensesTable.defaultProps = {
+  editing: false,
 };
