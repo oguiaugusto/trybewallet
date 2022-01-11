@@ -1,4 +1,10 @@
-import { REQUEST_API, GET_CURRENCIES, FAIL_REQUEST, ADD_EXPENSE } from '../actions';
+import {
+  REQUEST_API,
+  GET_CURRENCIES,
+  FAIL_REQUEST,
+  ADD_EXPENSE,
+  REMOVE_EXPENSE,
+} from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -20,6 +26,12 @@ export default function user(state = INITIAL_STATE, action) {
     return { ...state, error: action.err, isFetching: false };
   case ADD_EXPENSE: {
     const expenses = [...state.expenses, action.expense].map((ex, id) => ({ id, ...ex }));
+    return { ...state, expenses };
+  }
+  case REMOVE_EXPENSE: {
+    const expenses = state.expenses
+      .filter(({ id }) => id !== action.id)
+      .map((ex, id) => ({ id, ...ex }));
     return { ...state, expenses };
   }
   default:
