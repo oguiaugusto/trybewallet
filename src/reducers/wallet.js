@@ -4,16 +4,21 @@ import {
   FAIL_REQUEST,
   ADD_EXPENSE,
   REMOVE_EXPENSE,
+  EDIT_EXPENSE,
+  SAVE_EXPENSE,
 } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
+  editing: false,
+  editingExpense: {},
   isFetching: false,
   error: '',
 };
 
-export default function user(state = INITIAL_STATE, action) {
+export default function user(state = INITIAL_STATE,
+  action) {
   switch (action.type) {
   case REQUEST_API:
     return { ...state, isFetching: true };
@@ -34,6 +39,19 @@ export default function user(state = INITIAL_STATE, action) {
       .map((ex, id) => ({ id, ...ex }));
     return { ...state, expenses };
   }
+  case EDIT_EXPENSE:
+    return {
+      ...state,
+      editing: true,
+      editingExpense: state.expenses.filter(({ id }) => id === action.id)[0],
+    };
+  case SAVE_EXPENSE:
+    return {
+      ...state,
+      editing: false,
+      editingExpense: {},
+      expenses: state.expenses.map((ex) => (ex.id === action.id ? action.expense : ex)),
+    };
   default:
     return state;
   }
