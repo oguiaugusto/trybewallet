@@ -7,11 +7,16 @@ import '../style/wallet-page.css';
 
 class Wallet extends React.Component {
   render() {
-    const { props: { isFetching } } = this;
+    const { props: { isFetching, editing } } = this;
+    const editingClass = editing ? 'column-editing' : '';
 
     return (
       <div className="wallet-page d-flex">
-        <div className="wallet-left-column d-flex flex-column align-items-center">
+        <div
+          className={
+            `wallet-left-column d-flex flex-column align-items-center ${editingClass}`
+          }
+        >
           <Header />
           <div className="line" />
           <ExpenseForm />
@@ -29,14 +34,17 @@ class Wallet extends React.Component {
 
 const mapStateToProps = (state) => ({
   isFetching: state.wallet.isFetching,
+  editing: state.wallet.editing,
 });
 
 export default connect(mapStateToProps)(Wallet);
 
 Wallet.propTypes = {
   isFetching: PropTypes.bool,
+  editing: PropTypes.bool,
 };
 
 Wallet.defaultProps = {
   isFetching: false,
+  editing: false,
 };
