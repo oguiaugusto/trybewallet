@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchCurrenciesAct, addExpenseAct, saveExpenseAct } from '../actions';
+import { fetchCurrenciesAct, addExpenseAct, saveExpenseAct } from '../../actions';
+import Fields from './Fields';
 
 class ExpenseForm extends Component {
   constructor(props) {
@@ -77,7 +78,7 @@ class ExpenseForm extends Component {
 
       this.setState({ value: 0,
         description: '',
-        currency: 'defaultSelect',
+        currency: 'USD',
         method: 'defaultSelect',
         tag: 'defaultSelect',
       });
@@ -95,9 +96,10 @@ class ExpenseForm extends Component {
 
     this.setState({ value: 0,
       description: '',
-      currency: 'defaultSelect',
+      currency: 'USD',
       method: 'defaultSelect',
       tag: 'defaultSelect',
+      settledFields: false,
     });
   }
 
@@ -120,74 +122,32 @@ class ExpenseForm extends Component {
     const supportedCurrencies = Array.isArray(currencies)
       ? currencies : Object.keys(currencies);
 
+    const fieldsObj = {
+      value,
+      description,
+      currency,
+      method,
+      tag,
+      supportedCurrencies,
+      handleChange: this.handleChange,
+    };
+
     return (
-      <div className="form-expense">
-        <div className="fields">
-          <label htmlFor="value">
-            Valor
-            <input
-              data-testid="value-input"
-              type="number"
-              name="value"
-              id="value"
-              value={ value }
-              onChange={ this.handleChange }
-            />
-          </label>
-          <label htmlFor="description">
-            Descrição
-            <input
-              data-testid="description-input"
-              type="text"
-              name="description"
-              id="description"
-              value={ description }
-              onChange={ this.handleChange }
-            />
-          </label>
-          <label htmlFor="currency">
-            Moeda
-            <select
-              data-testid="currency-input"
-              name="currency"
-              id="currency"
-              onChange={ this.handleChange }
-              value={ currency }
-            >
-              {supportedCurrencies.map((c) => (
-                <option data-testid={ c } key={ `currency-${c}` } value={ c }>{c}</option>
-              ))}
-            </select>
-          </label>
-          <select
-            data-testid="method-input"
-            name="method"
-            onChange={ this.handleChange }
-            value={ method }
-          >
-            <option value="defaultSelect" disabled hidden>Método de pagamento</option>
-            <option value="Dinheiro">Dinheiro</option>
-            <option value="Cartão de crédito">Cartão de crédito</option>
-            <option value="Cartão de débito">Cartão de débito</option>
-          </select>
-          <select
-            data-testid="tag-input"
-            name="tag"
-            onChange={ this.handleChange }
-            value={ tag }
-          >
-            <option value="defaultSelect" disabled hidden>Categoria da despesa</option>
-            <option value="Alimentação">Alimentação</option>
-            <option value="Lazer">Lazer</option>
-            <option value="Trabalho">Trabalho</option>
-            <option value="Transporte">Transporte</option>
-            <option value="Saúde">Saúde</option>
-          </select>
-        </div>
+      <div className="form-expense d-flex flex-column">
+        <Fields
+          { ...fieldsObj }
+        />
         {editing ? (
           <button
             type="button"
             onClick={ this.handleSaveEdit }
+            className="btn btn-info align-self-center mt-2"
+            disabled={
+              value === 0
+              || description === ''
+              || method === 'defaultSelect'
+              || tag === 'defaultSelect'
+            }
           >
             Editar despesa
           </button>
@@ -195,6 +155,13 @@ class ExpenseForm extends Component {
           <button
             type="button"
             onClick={ this.handleAddExpense }
+            className="btn btn-success align-self-center mt-2"
+            disabled={
+              value === 0
+              || description === ''
+              || method === 'defaultSelect'
+              || tag === 'defaultSelect'
+            }
           >
             Adicionar despesa
           </button>

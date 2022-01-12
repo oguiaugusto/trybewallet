@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import logoTrybewalletWhite from '../images/logo-trybewallet-white.svg';
 
 class Header extends Component {
   constructor(props) {
@@ -28,13 +29,13 @@ class Header extends Component {
   render() {
     const { props: { email } } = this;
     return (
-      <header>
-        <div className="logo">
-          <img src="" alt="logo" />
+      <header className="wallet-header d-flex flex-column align-item-center">
+        <div className="logo d-flex justify-content-center pt-4">
+          <img src={ logoTrybewalletWhite } alt="logo" />
         </div>
-        <div className="info">
-          <p data-testid="email-field" className="email-field">{email}</p>
-          <p className="expenses">
+        <div className="info d-flex flex-column align-items-center">
+          <p data-testid="email-field" className="email-field mt-2 mb-1">{email}</p>
+          <p className="expenses mb-3">
             <span
               data-testid="total-field"
               className="total-field"

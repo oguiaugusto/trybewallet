@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { BiEdit, BiX } from 'react-icons/bi';
 import { editExpenseAct, removeExpenseAct } from '../actions';
 
 class ExpensesTable extends Component {
@@ -8,29 +9,29 @@ class ExpensesTable extends Component {
     const { props: { expenses, removeExpense, editExpense, editing } } = this;
     return (
       <div className="expenses-table">
-        <table>
+        <table className="table table-bordered">
           <thead>
-            <tr>
-              <th>#</th>
-              <th>Descrição</th>
-              <th>Tag</th>
-              <th>Método de pagamento</th>
-              <th>Valor</th>
-              <th>Moeda</th>
-              <th>Câmbio utilizado</th>
-              <th>Valor convertido</th>
-              <th>Moeda de conversão</th>
-              <th>Editar/Excluir</th>
+            <tr className="table-header">
+              <th scope="col" className="ps-2 pe-2 text-center">#</th>
+              <th scope="col">Valor</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">Método de pagamento</th>
+              <th scope="col">Tag</th>
+              <th scope="col">Moeda</th>
+              <th scope="col">Câmbio utilizado</th>
+              <th scope="col">Valor convertido</th>
+              <th scope="col">Moeda de conversão</th>
+              <th scope="col">Editar/Excluir</th>
             </tr>
           </thead>
           <tbody>
             {expenses.map((ex, i) => (
               <tr key={ `expense-${ex.id}` }>
-                <th>{ `${i + 1}` }</th>
-                <td>{ex.description}</td>
-                <td>{ex.tag}</td>
-                <td>{ex.method}</td>
+                <th scope="row" className="text-center">{ `${i + 1}` }</th>
                 <td>{ex.value}</td>
+                <td>{ex.description}</td>
+                <td>{ex.method}</td>
+                <td>{ex.tag}</td>
                 <td>{ex.exchangeRates[ex.currency].name.split('/')[0]}</td>
                 <td>{parseFloat(ex.exchangeRates[ex.currency].ask).toFixed(2)}</td>
                 <td>
@@ -41,14 +42,17 @@ class ExpensesTable extends Component {
                   }
                 </td>
                 <td>Real</td>
-                <td>
+                <td
+                  className="
+                  cell-buttons d-flex align-items-center justify-content-center"
+                >
                   <button
                     type="button"
                     data-testid="edit-btn"
                     onClick={ () => editExpense(ex.id) }
                     disabled={ editing }
                   >
-                    E
+                    <BiEdit size={ 25 } />
                   </button>
                   <button
                     type="button"
@@ -56,7 +60,7 @@ class ExpensesTable extends Component {
                     onClick={ () => removeExpense(ex.id) }
                     disabled={ editing }
                   >
-                    X
+                    <BiX size={ 30 } />
                   </button>
                 </td>
               </tr>

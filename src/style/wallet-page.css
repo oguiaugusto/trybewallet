@@ -1,0 +1,79 @@
+.wallet-page {
+  background-color: #f8f9fa;
+  height: 100vh;
+  width: 100vw;
+}
+
+.wallet-left-column {
+  background-color: #212529;
+  color: #f8f9fa;
+  width: 320px;
+}
+
+.wallet-page .line {
+  background-color: white;
+  height: 1px;
+  margin-bottom: 2rem;
+  width: 80%;
+}
+
+.email-field {
+  font-size: 12px;
+}
+
+.expenses {
+  font-size: 35px;
+  margin-top: -0.8rem;
+}
+
+.form-expense {
+  width: 80%;
+}
+
+.fields {
+  width: 100%;
+}
+
+.right-column {
+  width: calc(100vw - 320px);
+}
+
+.expenses-table {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+.cell-buttons button {
+  background: none;
+  border: none;
+  margin: 0 0.3rem;
+  padding: 0;
+}
+
+thead th {
+  font-size: 12px;
+}
+
+tbody {
+  font-size: 15px;
+}
+
+@media screen and ( min-width : 1440px ) {
+
+  .form-expense {
+    height: 450px;
+    justify-content: space-between;
+  }
+
+  .fields {
+    height: 400px;
+    justify-content: space-around;
+  }
+
+  .fields button {
+    margin: 0;
+  }
+
+}

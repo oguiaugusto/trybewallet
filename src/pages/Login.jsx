@@ -62,7 +62,7 @@ class Login extends React.Component {
       ? 'validated-input' : 'unvalidated-input';
 
     return (
-      <div className="page-container d-flex">
+      <div className="login-page d-flex">
         <div
           className="
             login-container d-flex flex-column align-items-center justify-content-center
@@ -94,7 +94,7 @@ class Login extends React.Component {
                 type="password"
                 name="password"
                 id="password"
-                placeholder="****************"
+                placeholder="******"
                 className={ `form-control mt-1 ${inputClassPassword}` }
                 value={ password }
                 onChange={ this.handleChange }
