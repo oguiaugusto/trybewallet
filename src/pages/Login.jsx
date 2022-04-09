@@ -70,7 +70,7 @@ class Login extends React.Component {
         >
           <img src={ logoTrybeWallet } alt="trybewallet logo" className="logo" />
           <div className="login-form d-flex flex-column">
-            <p className="display-6 text-center mb-4">Entre para continuar</p>
+            <p className="login-p display-6 text-center mb-4">Entre para continuar</p>
             <label htmlFor="email" className="form-label">
               Digite seu email:
               <input
@@ -113,7 +113,7 @@ class Login extends React.Component {
             </button>
           </div>
         </div>
-        <div className="coin-image d-flex align-items-center justify-content-center">
+        <div className="coin-image align-items-center justify-content-center">
           <img src={ coin } alt="coin" />
         </div>
       </div>

@@ -33,6 +33,7 @@
   background-color: gainsboro;
   border-bottom-right-radius: 25px;
   border-top-right-radius: 25px;
+  display: flex;
   width: 50%;
 }
 
@@ -55,5 +56,61 @@
 
   .coin-image img {
     width: 500px;
+  }
+}
+
+@media screen and ( max-width : 1280px ) {
+
+  .login-page {
+    width: 900px;
+  }
+
+  .login-container .logo {
+    width: 80%;
+  }
+
+  .coin-image img {
+    width: 80%;
+  }
+
+  .login-container .login-p {
+    font-size: 25px;
+  }
+}
+
+@media screen and ( max-width : 920px ) {
+
+  .login-page {
+    width: 90vw;
+  }
+}
+
+@media screen and ( max-width : 768px ) {
+
+  .coin-image {
+    display: none;
+  }
+
+  .login-container {
+    width: 100%;
+  }
+
+  .login-page {
+    height: 500px;
+  }
+
+  .login-form {
+    margin-top: 100px;
+  }
+}
+
+@media screen and ( max-width : 520px ) {
+
+  .login-page {
+    height: 420px;
+  }
+
+  .login-form {
+    margin-top: 80px;
   }
 }
