@@ -1,12 +1,18 @@
 .wallet-page {
   background-color: #f8f9fa;
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
+}
+
+.wallet-page .logo img {
+  padding: 0 15px;
 }
 
 .wallet-left-column {
   background-color: #212529;
   color: #f8f9fa;
+  padding-bottom: 30px;
+  position: relative;
   transition: 500ms background;
   width: 320px;
 }
@@ -41,12 +47,14 @@
 }
 
 .right-column {
-  width: calc(100vw - 320px);
+  flex: 1;
+  min-width: calc(100vw - 320px);
+  width: auto;
 }
 
 .expenses-table {
   height: 100%;
-  overflow-x: hidden;
+  overflow-x: scroll;
   overflow-y: scroll;
   width: 100%;
 }
@@ -64,6 +72,56 @@ thead th {
 
 tbody {
   font-size: 15px;
+}
+
+.expand-btn {
+  background-color: #495661;
+  border: none;
+  border-bottom-left-radius: 5px;
+  color: #eee;
+  font-size: 8px;
+  padding: 4px 8px;
+  position: absolute;
+  right: 0;
+}
+
+.wallet-left-column.close {
+  animation: close 200ms ease-in-out;
+  width: 50px;
+}
+
+.wallet-left-column.open {
+  animation: open 200ms ease-in-out;
+}
+
+.wallet-left-column.close * {
+  display: none;
+}
+
+.wallet-left-column.close .expand-btn {
+  display: block;
+}
+
+@keyframes close {
+
+  from {
+    width: 320px;
+  }
+
+  to {
+    width: 50px;
+  }
+}
+
+@keyframes open {
+
+  from {
+    width: 50px;
+  }
+
+  to {
+    width: 320px;
+  }
 }
 
 @media screen and ( min-width : 1440px ) {
