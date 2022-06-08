@@ -16,6 +16,8 @@ O objetivo era desenvolver uma carteira de controle de gastos com conversor de m
 
 O projeto foi desenvolvido em React e Redux consumindo dados da [AwesomeAPI](https://docs.awesomeapi.com.br/api-de-moedas) e a estrutura visual da página foi montada utilizando o [Figma](https://www.figma.com/file/411a9W4pSRM9EMU5EnQSpC/TrybeWallet).
 
+### [Link to the website](https://oguiaugusto.github.io/trybewallet/#/)
+
 ---
 
 ## Tecnologias Utilizadas
